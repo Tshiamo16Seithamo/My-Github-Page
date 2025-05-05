@@ -1,0 +1,19 @@
+<div class="container">
+    <h2 class="text-center mt-4">Book a Test Drive</h2>
+    <form action="submit_booking.php" method="post" class="mt-4">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required class="form-control">
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required class="form-control">
+        
+        <label for="car">Select BMW Model:</label>
+        <select id="car" name="car" class="form-control">
+            <option value="BMW X5">BMW X5</option>
+            <option value="BMW M3">BMW M3</option>
+            <option value="BMW i8">BMW i8</option>
+        </select>
+        
+        <button type="submit" class="btn btn-primary mt-3">Submit Booking</button>
+    </form>
+</div>
