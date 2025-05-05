@@ -17,7 +17,7 @@ const products = [
     name: "BROKE LOGO TEE",
     price: 180.95,
     category: "tees",
-    img: "images/tee1.jpg"
+    img: "images/broke-logo-tee.png"
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const products = [
   {
     id: 3,
     name: "BLACK TRACKSUIT",
-    price: 1000,
+    price: 1000.00,
     category: "tracksuits",
     img: "images/tracksuit1.jpg"
   },
