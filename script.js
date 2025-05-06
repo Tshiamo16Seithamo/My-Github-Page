@@ -10,35 +10,70 @@ const productGrid = document.querySelector('.product-grid');
 // Initialize Cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Product Data (would normally come from a database)
+// Product Data
 const products = [
   {
     id: 1,
-    name: "BROKE LOGO TEE",
+    name: "BROKE SIGNATURE TEE",
     price: 180.95,
     category: "tees",
     img: "images/broke-logo-tee.png"
   },
   {
     id: 2,
-    name: "GRAFFITI TEE",
+    name: "BROKE GRAPHIC TEE",
     price: 250.00,
     category: "tees",
     img: "images/tee2.jpg"
   },
   {
     id: 3,
-    name: "BLACK TRACKSUIT",
+    name: "BROKE FINGER SPELL TEE",
     price: 1000.00,
-    category: "tracksuits",
+    category: "tees",
     img: "images/tracksuit1.jpg"
   },
   {
     id: 4,
-    name: "BROKE SNAPBACK",
+    name: "BROKE FIST TEE",
+    price: 150.00,
+    category: "tees",
+    img: "images/cap1.jpg"
+  },
+  {
+    id: 5,
+    name: "BROKE VINTAGE CAP",
+    price: 200.00,
+    category: "caps",
+    img: "images/vintage-cap.jpg"
+  },
+  {
+    id: 6,
+    name: "BROKE BASEBALL CAP",
     price: 150.00,
     category: "caps",
-    img: "images/cap1.jpg"
+    img: "images/baseball-cap.jpg"
+  },
+  {
+    id: 7,
+    name: "BROKE CLASSIC CAP",
+    price: 100.00,
+    category: "caps",
+    img: "images/classic-cap.jpg"
+  },
+  {
+    id: 8,
+    name: "BROKE RAINBOW HOODIE",
+    price: 500.00,
+    category: "hoodies",
+    img: "images/rainbow-hoodie.jpg"
+  },
+  {
+    id: 9,
+    name: "BROKE ROYAL BLUE HOODIE",
+    price: 600.00,
+    category: "hoodies",
+    img: "images/royal-blue-hoodie.jpg"
   }
 ];
 
@@ -60,7 +95,7 @@ function initShop() {
 function renderProducts(productsToRender) {
   productGrid.innerHTML = productsToRender.map(product => `
     <div class="product-item" data-category="${product.category}">
-      <img src="${product.img}" alt="${product.name}">
+      <img src="${product.img}" alt="${product.name}" loading="lazy">
       <h3>${product.name}</h3>
       <p>$${product.price.toFixed(2)}</p>
       <button class="add-to-cart" data-id="${product.id}">ADD TO CART</button>
@@ -127,7 +162,7 @@ function updateCartUI() {
         <div class="cart-item-details">
           <h4>${item.name}</h4>
           <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
-          <p class="remove-item" data-id="${item.id}">Remove</p>
+          <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
       </div>
     `).join('');
@@ -166,8 +201,14 @@ window.addEventListener('click', (e) => {
 
 // Checkout Button
 document.querySelector('.checkout-btn')?.addEventListener('click', () => {
-  alert(`Checkout - Total: $${cartTotal.textContent}`);
-  // In a real app, this would redirect to payment processing
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+  } else {
+    alert(`Order confirmed! Total: $${cartTotal.textContent}\nThank you for shopping with BROKE!`);
+    cart = [];
+    updateCartUI();
+    saveCartToStorage();
+  }
 });
 
 // Initialize the shop when DOM is loaded

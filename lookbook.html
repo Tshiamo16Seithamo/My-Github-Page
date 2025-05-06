@@ -1,28 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Same head as index.html -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOOKBOOK | BROKE Streetwear</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="description" content="See how real people style BROKE streetwear - tees, caps, and hoodies in urban fashion">
 </head>
 <body>
   <header>
-    <!-- Same header as index.html -->
+    <div class="logo">
+      <h1>BROKE</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="lookbook.html" class="active">Lookbook</a></li>
+        <li><a href="feedback.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="cart-icon" id="cartIcon">🛒 <span id="cartCount">0</span></div>
   </header>
 
-  <section class="lookbook-header">
+  <section class="lookbook-hero">
     <h1>BROKE LOOKBOOK</h1>
-    <p>Styled by real people. Tag us <strong>#StayBroke</strong> for a feature.</p>
+    <p>Styled by real people. Tag <span>@BROKE</span> for a feature.</p>
+    <a href="shop.html" class="cta-button">SHOP THE LOOKS</a>
   </section>
 
-  <section class="gallery">
+  <section class="gallery-grid">
+    <!-- Lookbook Item 1 -->
     <div class="gallery-item">
-      <img src="images/look1.jpg" alt="Broke Tracksuit Styling">
+      <img src="images/lookbook/street-style-1.jpg" alt="BROKE Baseball Cap styled with white signature tee and jeans" loading="lazy">
+      <div class="caption">
+        <h3>CAP + SIGNATURE TEE</h3>
+        <p>Classic streetwear combo</p>
+        <a href="shop.html?category=caps" class="shop-link">Shop Caps</a>
+      </div>
     </div>
-    <!-- More gallery items... -->
+
+    <!-- Lookbook Item 2 -->
+    <div class="gallery-item">
+      <img src="images/lookbook/rainbow-hoodie-1.jpg" alt="BROKE Royal Blue Hoodie with black jeans and sneakers" loading="lazy">
+      <div class="caption">
+        <h3>ROYAL BLUE HOODIE</h3>
+        <p>Perfect for urban winters</p>
+        <a href="shop.html?category=hoodies" class="shop-link">Shop Hoodies</a>
+      </div>
+    </div>
+
+    <!-- Lookbook Item 3 -->
+    <div class="gallery-item">
+      <img src="images/lookbook/cap-styled-1.jpg" alt="BROKE Vintage Cap with distressed graphic tee" loading="lazy">
+      <div class="caption">
+        <h3>VINTAGE CAP COMBO</h3>
+        <p>Edgy summer look</p>
+        <a href="shop.html?category=tees" class="shop-link">Shop Tees</a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <!-- Same footer as index.html -->
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>BROKE</h3>
+        <p>Luxury streetwear without the markup</p>
+      </div>
+      <div class="footer-section">
+        <h3>QUICK LINKS</h3>
+        <ul>
+          <li><a href="shop.html">New Arrivals</a></li>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="feedback.html">Size Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>CONNECT</h3>
+        <div class="social-links">
+          <a href="#"><img src="images/social/instagram.png" alt="Instagram" width="24"></a>
+          <a href="#"><img src="images/social/twitter.png" alt="Twitter" width="24"></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 BROKE. All rights reserved.</p>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -6,49 +6,6 @@
   <title>SHOP | BROKE Streetwear</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* Additional Cart-specific Styles */
-    .cart-icon {
-      position: relative;
-      cursor: pointer;
-      font-size: 1.5rem;
-      margin-left: auto;
-      padding-right: 20px;
-    }
-    
-    #cartCount {
-      position: absolute;
-      top: -10px;
-      right: 5px;
-      background: #ff3e80;
-      color: #000;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 0.8rem;
-    }
-    
-    .product-item {
-      position: relative;
-    }
-    
-    .add-to-cart {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #000;
-      color: #fff;
-      border: 2px solid #ff3e80;
-      padding: 8px 15px;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .product-item:hover .add-to-cart {
-      opacity: 1;
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -58,7 +15,7 @@
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="shop.html">Shop</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="lookbook.html">Lookbook</a></li>
         <li><a href="feedback.html">Contact</a></li>
@@ -72,39 +29,14 @@
     <div class="shop-filter">
       <button class="filter-btn active" data-category="all">ALL</button>
       <button class="filter-btn" data-category="tees">TEES</button>
-      <button class="filter-btn" data-category="tracksuits">TRACKSUITS</button>
       <button class="filter-btn" data-category="caps">CAPS</button>
+      <button class="filter-btn" data-category="hoodies">HOODIES</button>
     </div>
   </section>
 
   <section class="product-grid">
-    <div class="product-item" data-category="tees">
-      <img src="images/tee1.jpg" alt="Broke Logo Tee">
-      <h3>BROKE LOGO TEE</h3>
-      <p>P180.95</p>
-      <button class="add-to-cart" data-name="BROKE LOGO TEE" data-price="29.99" data-img="images/tee1.jpg">ADD TO CART</button>
-    </div>
-    
-    <div class="product-item" data-category="tees">
-      <img src="images/tee2.jpg" alt="Broke Graphic Tee">
-      <h3>GRAFFITI TEE</h3>
-      <p>P250</p>
-      <button class="add-to-cart" data-name="GRAFFITI TEE" data-price="34.99" data-img="images/tee2.jpg">ADD TO CART</button>
-    </div>
-    
-    <div class="product-item" data-category="tracksuits">
-      <img src="images/tracksuit1.jpg" alt="Broke Tracksuit">
-      <h3>BLACK TRACKSUIT</h3>
-      <p>P1000</p>
-      <button class="add-to-cart" data-name="BLACK TRACKSUIT" data-price="89.99" data-img="images/tracksuit1.jpg">ADD TO CART</button>
-    </div>
-    
-    <div class="product-item" data-category="caps">
-      <img src="images/cap1.jpg" alt="Broke Snapback">
-      <h3>BROKE SNAPBACK</h3>
-      <p>P150</p>
-      <button class="add-to-cart" data-name="BROKE SNAPBACK" data-price="39.99" data-img="images/cap1.jpg">ADD TO CART</button>
-    </div>
+    <!-- Products will be dynamically inserted here by script.js -->
+    <div class="loading-message">Loading products...</div>
   </section>
 
   <!-- Cart Modal -->
@@ -113,7 +45,6 @@
       <span class="close-cart">&times;</span>
       <h2>YOUR CART</h2>
       <div class="cart-items" id="cartItems">
-        <!-- Cart items will appear here -->
         <p class="empty-cart">Your cart is empty</p>
       </div>
       <div class="cart-total">
@@ -124,94 +55,34 @@
   </div>
 
   <footer>
-    <p>&copy; 2024 BROKE. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>QUICK LINKS</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>SUPPORT</h3>
+        <ul>
+          <li><a href="feedback.html">Contact</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>CONNECT</h3>
+        <div class="social-icons">
+          <a href="#"><img src="images/instagram-icon.png" alt="Instagram"></a>
+          <a href="#"><img src="images/twitter-icon.png" alt="Twitter"></a>
+        </div>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 BROKE. All rights reserved.</p>
   </footer>
 
-  <script>
-    // Cart System
-    let cart = [];
-    const cartIcon = document.getElementById('cartIcon');
-    const cartModal = document.getElementById('cartModal');
-    const cartItems = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-    const cartTotal = document.getElementById('cartTotal');
-    const emptyCartMsg = document.querySelector('.empty-cart');
-
-    // Open/Close Cart
-    cartIcon.addEventListener('click', () => {
-      cartModal.style.display = 'block';
-    });
-
-    document.querySelector('.close-cart').addEventListener('click', () => {
-      cartModal.style.display = 'none';
-    });
-
-    // Add to Cart
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', () => {
-        const product = {
-          name: button.dataset.name,
-          price: parseFloat(button.dataset.price),
-          img: button.dataset.img
-        };
-        
-        cart.push(product);
-        updateCart();
-        
-        // Visual feedback
-        button.textContent = 'ADDED!';
-        setTimeout(() => {
-          button.textContent = 'ADD TO CART';
-        }, 1000);
-      });
-    });
-
-    // Update Cart UI
-    function updateCart() {
-      cartCount.textContent = cart.length;
-      
-      if (cart.length === 0) {
-        emptyCartMsg.style.display = 'block';
-        cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
-      } else {
-        emptyCartMsg.style.display = 'none';
-        cartItems.innerHTML = '';
-        
-        let total = 0;
-        
-        cart.forEach((item, index) => {
-          total += item.price;
-          cartItems.innerHTML += `
-            <div class="cart-item">
-              <img src="${item.img}" alt="${item.name}">
-              <div>
-                <p>${item.name}</p>
-                <p>$${item.price.toFixed(2)}</p>
-                <p class="remove-item" data-index="${index}">Remove</p>
-              </div>
-            </div>
-          `;
-        });
-        
-        // Add event listeners to new remove buttons
-        document.querySelectorAll('.remove-item').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            const index = e.target.dataset.index;
-            cart.splice(index, 1);
-            updateCart();
-          });
-        });
-      }
-      
-      cartTotal.textContent = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
-    }
-
-    // Close modal when clicking outside
-    window.addEventListener('click', (e) => {
-      if (e.target === cartModal) {
-        cartModal.style.display = 'none';
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
