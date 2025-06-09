@@ -7,73 +7,81 @@ const cartTotal = document.getElementById('cartTotal');
 const filterButtons = document.querySelectorAll('.filter-btn');
 const productGrid = document.querySelector('.product-grid');
 
+// Currency Configuration (BWP)
+const currencySymbol = 'P';
+const currencyFormat = new Intl.NumberFormat('en-BW', {
+  style: 'currency',
+  currency: 'BWP',
+  minimumFractionDigits: 2
+});
+
 // Initialize Cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Product Data
+// Product Data (all prices in BWP)
 const products = [
   {
     id: 1,
     name: "BROKE SIGNATURE TEE",
     price: 180.95,
     category: "tees",
-    img: "images/broke-logo-tee.png"
+    img: "images/products/broke-logo-tee.png"
   },
   {
     id: 2,
     name: "BROKE GRAPHIC TEE",
     price: 250.00,
     category: "tees",
-    img: "images/tee2.jpg"
+    img: "images/products/tee2.jpg"
   },
   {
     id: 3,
     name: "BROKE FINGER SPELL TEE",
     price: 1000.00,
     category: "tees",
-    img: "images/tracksuit1.jpg"
+    img: "images/products/tracksuit1.jpg"
   },
   {
     id: 4,
     name: "BROKE FIST TEE",
     price: 150.00,
     category: "tees",
-    img: "images/cap1.jpg"
+    img: "images/products/cap1.jpg"
   },
   {
     id: 5,
     name: "BROKE VINTAGE CAP",
     price: 200.00,
     category: "caps",
-    img: "images/vintage-cap.jpg"
+    img: "images/products/vintage-cap.jpg"
   },
   {
     id: 6,
     name: "BROKE BASEBALL CAP",
     price: 150.00,
     category: "caps",
-    img: "images/baseball-cap.jpg"
+    img: "images/products/baseball-cap.jpg"
   },
   {
     id: 7,
     name: "BROKE CLASSIC CAP",
     price: 100.00,
     category: "caps",
-    img: "images/classic-cap.jpg"
+    img: "images/products/classic-cap.jpg"
   },
   {
     id: 8,
     name: "BROKE RAINBOW HOODIE",
     price: 500.00,
     category: "hoodies",
-    img: "images/rainbow-hoodie.jpg"
+    img: "images/products/rainbow-hoodie.jpg"
   },
   {
     id: 9,
     name: "BROKE ROYAL BLUE HOODIE",
     price: 600.00,
     category: "hoodies",
-    img: "images/royal-blue-hoodie.jpg"
+    img: "images/products/royal-blue-hoodie.jpg"
   }
 ];
 
@@ -91,13 +99,13 @@ function initShop() {
   });
 }
 
-// Render products to the page
+// Render products to the page with BWP formatting
 function renderProducts(productsToRender) {
   productGrid.innerHTML = productsToRender.map(product => `
     <div class="product-item" data-category="${product.category}">
       <img src="${product.img}" alt="${product.name}" loading="lazy">
       <h3>${product.name}</h3>
-      <p>$${product.price.toFixed(2)}</p>
+      <p class="price">${currencyFormat.format(product.price)}</p>
       <button class="add-to-cart" data-id="${product.id}">ADD TO CART</button>
     </div>
   `).join('');
@@ -161,7 +169,7 @@ function updateCartUI() {
         <img src="${item.img}" alt="${item.name}">
         <div class="cart-item-details">
           <h4>${item.name}</h4>
-          <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
+          <p>${currencyFormat.format(item.price)} × ${item.quantity}</p>
           <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
       </div>
@@ -175,9 +183,9 @@ function updateCartUI() {
     });
   }
   
-  // Update total
+  // Update total with BWP formatting
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  cartTotal.textContent = total.toFixed(2);
+  cartTotal.textContent = currencyFormat.format(total);
 }
 
 function saveCartToStorage() {
@@ -204,7 +212,8 @@ document.querySelector('.checkout-btn')?.addEventListener('click', () => {
   if (cart.length === 0) {
     alert('Your cart is empty!');
   } else {
-    alert(`Order confirmed! Total: $${cartTotal.textContent}\nThank you for shopping with BROKE!`);
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    alert(`Order confirmed! Total: ${currencyFormat.format(total)}\nThank you for shopping with BROKE!`);
     cart = [];
     updateCartUI();
     saveCartToStorage();
